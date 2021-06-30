@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <title>Recipes</title>
+  </head>
+  <body>
+    <div class="container py-lg-5">
+      <nav style="display: flex; justify-content: space-between">
+        <h1 class="mb-5">Welcome {{user.first_name}} !</h1>
+        <div>
+          <a class="me-5" href="/dashboard">Dashboard</a>
+          <a class="me-2" href="/logout">Logout</a>
+        </div>
+      </nav>
+      <h4 class="mb-5">{{recipe.name}}</h4>
+      <div
+        style="
+          width: 600px;
+          height: 200px;
+          border: 1px solid black;
+          padding: 1em;
+        "
+      >
+        Description: {{recipe.description}} <br />
+        Under 30 Minutes: {% if recipe.under_30 == 1%} Yes {%endif%} {% if
+        recipe.under_30 == 0%} No {%endif%}<br />
+        Instructions: {{recipe.instructions}} <br />
+        Date Made: {{recipe.date_made}}
+      </div>
+      <div>Comment: <input type="text" name="recipe_comment" /></div>
+    </div>
+  </body>
+</html>

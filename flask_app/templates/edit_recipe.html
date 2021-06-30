@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Recipe</title>
+  </head>
+  <body>
+    <div class="container py-lg-5">
+      <nav style="display: flex; justify-content: space-between">
+        <h1 class="mb-5">Add New Recipe</h1>
+        <div>
+          <a class="me-5" href="/dashboard">Dashboard</a>
+          <a class="me-2" href="/logout">Logout</a>
+        </div>
+      </nav>
+      {% with messages = get_flashed_messages() %}
+      <!-- declare a variable called messages -->
+      {% if messages %}
+      <!-- check if there are any messages -->
+      {% for message in messages %}
+      <!-- loop through the messages -->
+      <p class="error">{{message}}</p>
+      <!-- display each message in a paragraph tag -->
+      {% endfor %} {% endif %} {% endwith %}
+      <form
+        action="/recipes/{{recipe.id}}/update"
+        method="POST"
+        style="width: 650px"
+      >
+        <input type="hidden" name="creator_id" value="{{session['user_id']}}" />
+        <input type="hidden" name="recipe_id" value="{{recipe.id}}" />
+        Name: <input type="text" name="name" value="{{recipe.name}}" /> Date
+        Made On:
+        <input type="date" name="date_made" value="{{recipe.date_made}}" />
+        <br />
+        Description:
+        <input type="text" name="description" value="{{recipe.description}}" />
+        Under 30 minutes? <input {% if recipe.under_30 == 1 %} checked {%endif%}
+        type="radio" value="1" name="under_30" /> Yes <input {% if
+        recipe.under_30 == 0 %} checked {%endif%} type="radio" value="0"
+        name="under_30" /> No
+        <br />
+        <div style="display: flex; justify-content: start">
+          Instructions:
+          <textarea style="width: 100%" type="text" name="instructions">
+{{recipe.instructions}}</textarea
+          >
+        </div>
+        <br />
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </body>
+</html>
